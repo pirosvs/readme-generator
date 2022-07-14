@@ -1,3 +1,4 @@
+const fs = require('fs');
 const inquirer = require('inquirer');
 
 inquirer
@@ -15,10 +16,14 @@ inquirer
     {
       type: 'input',
       message: 'What is your preferred method of communication?',
+      choices: [],
       name: 'comms',
     },
   ])
   .then((response) => {
     console.log(response)
+    const filename = `${response.name.split(' ').join('')}.json`;
+    fs.writeFile(filename, JSON.stringify(Data, null, '\t'), (err) =>
+        err ? console.log(err) : console.log('Success'));
   }
   );
